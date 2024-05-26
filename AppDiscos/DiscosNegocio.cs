@@ -32,7 +32,10 @@ namespace AppDiscos
                     aux.Titulo = (string)lector["Titulo"];
                     aux.FechaLanzamiento = (DateTime)lector["FechaLanzamiento"];
                     aux.CantidadCanciones = (int)lector["CantidadCanciones"];
+
+                    if (!(lector["UrlImagenTapa"] is DBNull))
                     aux.UrlImagenTapa = (string)lector["UrlImagenTapa"];
+
 
                     lista.Add(aux);
 

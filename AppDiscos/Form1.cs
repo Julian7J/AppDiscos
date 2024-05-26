@@ -21,29 +21,50 @@ namespace AppDiscos
         private void Form1_Load(object sender, EventArgs e)
         {
             DiscosNegocio negocio = new DiscosNegocio();
+
+            try
+            {
             listaDiscos = negocio.listar();
             dgvDiscos.DataSource = listaDiscos;
-            pictureBoxDiscos.Load(listaDiscos[0].UrlImagenTapa);
+            cargarImagen(listaDiscos[0].UrlImagenTapa);
 
-           
+            }
+            catch ( Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+
         }
 
-         //   CargarDiscos();
-         //  }
+        private void pictureBoxDiscos_Click(object sender, EventArgs e)
+        {
 
-            //   private void CargarDiscos()
-            //   {
-            //       DiscosNegocio negocio = new DiscosNegocio();
-            //       List<Discos> listaDiscos = negocio.listar();
-
-            //       if (listaDiscos.Count > 0)
-            //       {
-            //           pictureBoxDiscos.ImageLocation = "https://proyectodegardo.weebly.com/uploads/1/9/4/0/19400833/3638973.jpg?478";
-            //       }
-            //       else
-            //       {
-            //           MessageBox.Show("No hay discos disponibles para mostrar.");
-            //       }
         }
+
+        private void dgvDiscos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void dgvDiscos_SelectionChanged(object sender, EventArgs e)
+        {
+            Discos seleccionado = (Discos)dgvDiscos.CurrentRow.DataBoundItem;
+           cargarImagen(seleccionado.UrlImagenTapa);
+
+        }
+
+       private void cargarImagen (string imagen) 
+        {
+            try
+            {
+                pictureBoxDiscos.Load(imagen);
+            }
+            catch (Exception)
+            {
+
+                pictureBoxDiscos.Load("https://sunrisedaycamp.org/wp-content/uploads/2020/10/placeholder.png");
+            }
+        }
+    } 
     }
-}
+
